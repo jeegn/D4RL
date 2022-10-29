@@ -28,12 +28,12 @@ except ImportError as e:
 #         print(_ERROR_MESSAGE % 'Flow', file=sys.stderr)
 #         print(e, file=sys.stderr)
 
-try:
-    import d4rl.kitchen
-except ImportError as e:
-    if not SUPPRESS_MESSAGES:
-        print(_ERROR_MESSAGE % 'FrankaKitchen', file=sys.stderr)
-        print(e, file=sys.stderr)
+# try:
+#     import d4rl.kitchen
+# except ImportError as e:
+#     if not SUPPRESS_MESSAGES:
+#         print(_ERROR_MESSAGE % 'FrankaKitchen', file=sys.stderr)
+#         print(e, file=sys.stderr)
 
 # try:
 #     import d4rl.carla
@@ -49,17 +49,17 @@ except ImportError as e:
     if not SUPPRESS_MESSAGES:
         print(_ERROR_MESSAGE % 'GymBullet', file=sys.stderr)
         print(e, file=sys.stderr)
-
+print('before reverse_normalized_score')
 def reverse_normalized_score(env_name, score):
     ref_min_score = d4rl.infos.REF_MIN_SCORE[env_name]
     ref_max_score = d4rl.infos.REF_MAX_SCORE[env_name]
     return (score * (ref_max_score - ref_min_score)) + ref_min_score
-
+print('get_normalized_score')
 def get_normalized_score(env_name, score):
     ref_min_score = d4rl.infos.REF_MIN_SCORE[env_name]
     ref_max_score = d4rl.infos.REF_MAX_SCORE[env_name]
     return (score - ref_min_score) / (ref_max_score - ref_min_score)
-
+print('qlearning_dataset')
 def qlearning_dataset(env, dataset=None, terminate_on_end=False, **kwargs):
     """
     Returns datasets formatted for use by standard Q-learning algorithms,
@@ -133,7 +133,7 @@ def qlearning_dataset(env, dataset=None, terminate_on_end=False, **kwargs):
         'terminals': np.array(done_),
     }
 
-
+print('sequence_dataset')
 def sequence_dataset(env, dataset=None, **kwargs):
     """
     Returns an iterator through trajectories.
@@ -186,3 +186,4 @@ def sequence_dataset(env, dataset=None, **kwargs):
 
 
 __version__ = "1.1"
+print('Finished init.py')
